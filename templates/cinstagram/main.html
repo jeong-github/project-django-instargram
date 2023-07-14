@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- 구글 아이콘 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <title> Chan instagram</title>
+</head>
+
+<style>
+.main_body {
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    background-color: #FAFAFA;
+}
+
+.left_body {
+    {#background-color: skyblue;#}
+    margin-right: 100px;
+    width: 500px;
+    height: 2000px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right_body {
+    {#background-color: yellow;#}
+    padding-top: 20px;
+    width: 300px;
+    height: 1000px;
+    left: 72%;
+    position: fixed
+}
+
+.feed_box {
+    background-color: white;
+    width: 480px;
+    margin: 10px;
+    min-height: auto;
+    padding-bottom: 10px;
+}
+
+.feed_img{
+    width: 100%;
+    object-fit: contain;
+}
+
+.feed_content{
+    padding: 0px 10px;
+}
+
+.feed_like{
+    padding: 0px 10px;
+}
+
+.feed_reply{
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.feed_txt{
+    font-size: 14px;
+}
+
+
+
+.feed_icon{
+    padding: 5px 5px 0px 5px;
+    display: flex;
+    justify-content: space-between;
+}span{
+     padding-right: 5px;
+}
+
+.feed_name{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.feed_name_txt{
+    font-size: 14px;
+    padding: 0px 10px;
+    font-weight: bold;
+}
+
+.profile_box {
+    width: 40px;
+    height: 40px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.name_content{
+    display: flex;
+    flex-direction: column;
+}
+
+.name_content_txt{
+    font-size: 12px;
+    padding: 0px 10px;
+    font-weight: bold;
+    color: lightgray;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 190px;
+}
+
+.big_profile_box {
+    width: 60px;
+    height: 60px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+
+.link_txt{
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.recommend_box {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    align-items: center;
+}
+
+.comment_box{
+    margin: 40px 0 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: lightgray;
+    display: flex;
+    flex-direction: column;
+}
+
+</style>
+<body>
+
+<!-- 상단 아이콘들 추가 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <img style="height: 30px; object-fit: contain"
+            src="https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png">
+        <input class="form-control" style="width: 200px" type="search" placeholder="검색" aria-label="Search">
+
+    <div>
+        <span class="material-symbols-outlined">home</span>
+        <span class="material-symbols-outlined">send</span>
+        <span class="material-symbols-outlined">add_box</span>
+        <span class="material-symbols-outlined">explore</span>
+        <span class="material-symbols-outlined">favorite</span>
+    </div>
+ </div>
+</nav>
+
+<!-- 바디 영역 -->
+
+
+<div class="main_body">
+  <div class="left_body">
+
+      <!-- 첫번째 부분 -->
+    {% for feed in feed_list %}
+    <div class="border feed_box">
+      <div class="feed_name">
+        <div class="profile_box">
+          <img class="profile_img" src="{{ feed.profile_image }}">
+        </div>
+        <span class="feed_name_txt"> {{ feed.user_id }}</span>
+      </div>
+      <img class="feed_img" src="{{ feed.image }}">
+
+      <div class="feed_icon">
+        <div>
+            <span class="material-symbols-outlined">
+            favorite
+            </span>
+            <span class="material-symbols-outlined">
+            comment
+            </span>
+            <span class="material-symbols-outlined">
+            send
+            </span>
+        </div>
+        <div>
+            <span class="material-symbols-outlined">
+            bookmark
+            </span>
+        </div>
+      </div>
+      <div class="feed_like">
+        <p class="feed_txt"> <b>좋아요 {{ feed.like_count }}개</b></p>
+      </div>
+      <div class="feed_content">
+        <p class="feed_txt"> <b> {{ feed.user_id }} </b> {{ feed.content }}</p>
+      </div>
+      <div class="feed_reply">
+        <span class="feed_txt"> <b> mychew </b> 댓글은 아직 모델을 안만들어서 </span>
+        <span class="feed_txt"> <b> cho </b> 항상 이 두개가 나옵니다 ㅋㅋ </span>
+      </div>
+    </div>
+    {% endfor %}
+
+
+      <!-- 두번째 부분 -->
+      <div class="border feed_box">
+          <div class="feed_name">
+            <div class="profile_box">
+              <img class="profile_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMgJ0DLdyC_uSj_89WwBZgzjbJhNYqNr6n2g&usqp=CAU">
+            </div>
+            <span class="feed_name_txt"> jin.99 </span>
+          </div>
+
+      <img class="feed_img "
+           src = "data:image/jpeg;base64,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">
+      <div class="feed_icon">
+        <div>
+            <span class="material-symbols-outlined">
+            favorite
+            </span>
+            <span class="material-symbols-outlined">
+            comment
+            </span>
+            <span class="material-symbols-outlined">
+            send
+            </span>
+        </div>
+        <div>
+            <span class="material-symbols-outlined">
+            bookmark
+            </span>
+        </div>
+      </div>
+
+      <div class="feed_like">
+        <p class="feed_txt"> <b>좋아요 200개</b></p>
+      </div>
+      <div class="feed_content">
+        <p class="feed_txt">
+            <b> ‘아이유(IU)’ 정규 5집 [LILAC]
+                “안녕 꽃잎 같은 안녕”
+                “내 맘에 아무 의문이 없어 난 이 다음으로 가요”
+            </b>
+        </p>
+      </div>
+      <div class="feed_reply">
+        <span class="feed_txt"> <b> mychew </b> 언니 사랑해요 ㅠㅠ</span>
+        <span class="feed_txt"> <b> cho </b> Lilac 3.25</span>
+      </div>
+    </div>
+
+      <!-- 3번째 부분 -->
+      <div class="border feed_box">
+          <div class="feed_name">
+            <div class="profile_box">
+              <img class="profile_img" src="http://planet-times.com/Files/320/News/202301/5249_20230102141749820.JPG">
+            </div>
+            <span class="feed_name_txt"> chan7979 </span>
+          </div>
+
+      <img class="feed_img "
+           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf0oWWX6jsYvRVhcn9CSAxc_zOAlKtAYRGpQ&usqp=CAU">
+      <div class="feed_icon">
+        <div>
+            <span class="material-symbols-outlined">
+            favorite
+            </span>
+            <span class="material-symbols-outlined">
+            comment
+            </span>
+            <span class="material-symbols-outlined">
+            send
+            </span>
+        </div>
+        <div>
+            <span class="material-symbols-outlined">
+            bookmark
+            </span>
+        </div>
+      </div>
+
+      <div class="feed_like">
+        <p class="feed_txt"> <b>좋아요 50개</b></p>
+      </div>
+      <div class="feed_content">
+        <p class="feed_txt"> <b> chan7979 </b>
+            🌊입이 쩍 벌어지는 뷰 맛집 카페 총정리🌊
+            동남아 여행지 복붙해놓은 노을맛집 갬성 카페부터
+            푸릇푸릇한 자연, 탁트인 오션뷰까지 멍 때리기 딱
+            좋음=💙
+            5월에 쉬는 날도 많은데 @@대부도 드라이브 고?!
+        </p>
+      </div>
+      <div class="feed_reply">
+        <span class="feed_txt"> <b> mychew </b> 대부도가 어디염..??</span>
+        <span class="feed_txt"> <b> cho </b> 머야 카페 많이 생것네 </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="right_body">
+    <div class="feed_name" style="justify-content: space-between">
+      <div style="display: flex; align-items: center; ">
+        <div class="big_profile_box">
+          <img class="profile_img"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzGUVVImmJwEQ-zjCgomvS2-b8DJ8YfJTWCQ&usqp=CAU"   >
+        </div>
+        <div class="name_content">
+          <span class="feed_name_txt"> jin.99 </span>
+          <span class="name_content_txt"> Moon Kyujin</span>
+        </div>
+      </div>
+
+      <a class="link_txt" >
+        전환
+      </a>
+    </div>
+
+    <div class="recommend_box">
+      <span style="color: gray"> 회원님을 위한 추천</span>
+      <span style="font-size: 12px"> 모두 보기 </span>
+    </div>
+    <div>
+      <div class="feed_name" style="justify-content: space-between">
+        <div class="profile_box">
+          <img class="profile_img"
+               src="https://i.pinimg.com/736x/93/a6/8b/93a68b57a54e4bdc73d43d1d049b94b3.jpg">
+        </div>
+        <div class="name_content">
+          <span class="feed_name_txt"> dation3388 </span>
+          <span class="name_content_txt"> Jinstargram 신규가입</span>
+        </div>
+        <a class="link_txt">
+          팔로우
+        </a>
+      </div>
+      <div class="feed_name" style="justify-content: space-between">
+        <div class="profile_box">
+          <img class="profile_img"
+               src="http://file3.instiz.net/data/cached_img/upload/2021/01/27/18/2ce2f41f7e9f09c0acc77faac7452dbf.jpg">
+        </div>
+        <div class="name_content">
+          <span class="feed_name_txt"> gaoudi </span>
+          <span class="name_content_txt"> IU 외 5명이 팔로우</span>
+        </div>
+        <a class="link_txt">
+          팔로우
+        </a>
+      </div>
+      <div class="feed_name" style="justify-content: space-between">
+        <div class="profile_box">
+          <img class="profile_img"
+               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTiCVWdogd6Ocsm08kL8ph4sb1MN0AYEiSUQ&usqp=CAU">
+        </div>
+        <div class="name_content">
+          <span class="feed_name_txt"> CAU </span>
+          <span class="name_content_txt"> IU 외 5명이 팔로우</span>
+        </div>
+        <a class="link_txt">
+          팔로우
+        </a>
+      </div>
+      <div class="feed_name" style="justify-content: space-between">
+        <div class="profile_box">
+          <img class="profile_img"
+               src="https://pbs.twimg.com/media/EhzH0_DU4AEZ9yr.jpg">
+        </div>
+        <div class="name_content">
+          <span class="feed_name_txt"> 123456789 </span>
+          <span class="name_content_txt"> 그냥 추천해봄 </span>
+        </div>
+        <a class="link_txt">
+          팔로우
+        </a>
+      </div>
+      <div class="feed_name" style="justify-content: space-between">
+        <div class="profile_box">
+          <img class="profile_img"
+               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPNYM5RQgA2F7BtpBQ-OrNFKDXVDUpypRuw&usqp=CAU">
+        </div>
+        <div class="name_content">
+          <span class="feed_name_txt"> instiz </span>
+          <span class="name_content_txt"> 애도 유명해 </span>
+        </div>
+        <a class="link_txt">
+          팔로우
+        </a>
+      </div>
+    </div>
+    <div class="comment_box">
+      <span> 인스타그램 클론 코딩 </span>
+      <span> https://cholol.chan.com </span>
+      <br>
+      <span> @2021 chan.99 </span>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+-->
+
+</body>
+</html>
